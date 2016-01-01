@@ -7,7 +7,7 @@ ballyCyrk.controller('signupController', function(userFactory, $location){
       if (data.message){
         _this.message = data;
       } else {
-        _this.user = data.user[0];
+        _this.user = data.user;
         console.log('user',_this.user._id);
         $location.path('/profile');
       }
