@@ -15,7 +15,7 @@ ballyCyrk.config(function($routeProvider){
     templateUrl: './../static/views/partials/_signup.html',
     controller: 'signupController as SC'
   })
-  .when('/profile', {
+  .when('/profile/:id', {
     templateUrl: './../static/views/partials/_profile.html',
     controller: 'profileController as PC'
   })

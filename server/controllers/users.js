@@ -13,6 +13,15 @@ module.exports ={
     console.log('req', req.sessionStore.sessions);
     console.log('NOLOG', req.body);
     res.json({ message: req.body.error });
+  },
+  get: function(req, res){
+    User.findOne({_id: req.params.id}, function(err, user){
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(user);
+      }
+    });
   }
 };
 

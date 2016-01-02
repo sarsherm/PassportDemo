@@ -10,13 +10,30 @@ ballyCyrk.factory('userFactory', function($http){
   }
 
   factory.loginUser = function(user, callback){
-    console.log('Factory LOGIN!', user);
     $http.post('/login', user).success(function(output){
       console.log(output);
       callback(output);
     })
-
   }
+
+  factory.facebook = function(callback){
+    $http.get('/auth/facebook').success(function(output){
+      callback(output);
+    })
+  }
+
+  factory.google = function(callback){
+      $http.get('/auth/google').success(function(output){
+      callback(output);
+    })
+  }
+
+  factory.show = function(id, callback){
+    $http.get('/user/'+id).success(function(output){
+      callback(output);
+    })
+  }
+
   return factory;
 })
 

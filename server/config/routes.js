@@ -1,6 +1,7 @@
 var user                = require('../controllers/users.js');
 
 module.exports = function(app, passport){
+  app.get('/user/:id',          function(req,res) {user.get(req, res)})
   app.get('/login',             function(req,res) {user.nolog(req, res) })
   // show the login form & pass any flash data if it exists
   // res.render('login.ejs', {message: req.flash('loginMessage') });
@@ -18,7 +19,33 @@ module.exports = function(app, passport){
     function(req, res) {
       console.log('RES', req.user);
       res.json({user: req.user});
-    });
+  });
+// =====================================
+// FACEBOOK ROUTES =====================
+// =====================================
+// route for facebook authentication and login
+  app.get('/auth/facebook', passport.authenticate('facebook',
+                                                  { scope : 'email' }));
+  // handle the callback after facebook has authenticated the user
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect : '/profile',
+        failureRedirect : '/'
+  }));
+  // =====================================
+  // GOOGLE ROUTES =======================
+  // =====================================
+  // send to google to do the authentication
+  // profile gets us their basic information including their name
+  // email gets their emails
+  app.get('/auth/google', passport.authenticate('google',
+                          { scope : ['profile', 'email'] }));
+  // the callback after google has authenticated the user
+  app.get('/auth/google/callback',
+          passport.authenticate('google', {
+                  successRedirect : '/profile',
+                  failureRedirect : '/'
+          }));
 
 // =====================================
 // PROFILE SECTION =====================

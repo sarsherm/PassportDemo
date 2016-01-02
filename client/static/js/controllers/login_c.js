@@ -7,8 +7,8 @@ ballyCyrk.controller('loginController', function(userFactory, $location){
         _this.message = data
       } else {
         _this.user = data.user[0];
-        console.log('user',_this.user._id);
-        $location.path('/profile');
+        var id = _this.user._id;
+        $location.path('/profile/'+id);
       }
     });
   }

@@ -1,10 +1,12 @@
-ballyCyrk.controller('profileController', function(userFactory){
+ballyCyrk.controller('profileController', function(userFactory, $routeParams){
   var _this = this;
 
-  this.signup = function(){
-    userFactory.create(_this.user, function(data){
+  this.currentUser = function(){
+    userFactory.show($routeParams.id, function(data){
       _this.user = data;
-      console.log('SC!', _this.user);
+      console.log('PC!', _this.user);
     });
   }
+
+  this.currentUser();
 })
